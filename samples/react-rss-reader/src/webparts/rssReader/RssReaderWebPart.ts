@@ -4,18 +4,17 @@ Template concept from https://github.com/SharePoint/sp-dev-fx-webparts/tree/mast
 import * as React from                                     'react';
 import * as ReactDom from                                  'react-dom';
 import { Version, Text, Environment, EnvironmentType} from '@microsoft/sp-core-library';
+import { BaseClientSideWebPart } from                      '@microsoft/sp-webpart-base';
 import {
-  BaseClientSideWebPart,
   IPropertyPaneConfiguration,
   IPropertyPaneField,
-  PropertyPaneTextField,
-  PropertyPaneSlider,
-  PropertyPaneToggle,
   IPropertyPaneChoiceGroupOption,
   PropertyPaneChoiceGroup,
   PropertyPaneHorizontalRule,
-  PropertyPaneLabel
-} from '@microsoft/sp-webpart-base';
+  PropertyPaneLabel,
+  PropertyPaneSlider,
+  PropertyPaneTextField,
+  PropertyPaneToggle } from                                '@microsoft/sp-property-pane';
 import { update, isEmpty } from                            '@microsoft/sp-lodash-subset';
 
 import {
@@ -236,7 +235,7 @@ export default class RssReaderWebPart extends BaseClientSideWebPart<IRssReaderWe
   private initializeRequiredProperties() {
 
     //require an initial feed service
-    this.properties.feedService = this.properties.feedService ? this.properties.feedService : FeedServiceOption.Rss2Json;
+    this.properties.feedService = this.properties.feedService || this.properties.feedService === FeedServiceOption.Default ? this.properties.feedService : FeedServiceOption.Rss2Json;
 
     this.properties.useCorsProxy = this.properties.useCorsProxy ? true : false;
     this.properties.corsProxyUrl = this.properties.corsProxyUrl ? this.properties.corsProxyUrl : "";
@@ -560,7 +559,7 @@ export default class RssReaderWebPart extends BaseClientSideWebPart<IRssReaderWe
       }
       else {
 
-        console.log("attempt to resolve");
+        //console.log("attempt to resolve");
         // Resolves an error if the file doesn't answer a simple head request
         await this._templateService.ensureFileResolves(value);
         return '';

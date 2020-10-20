@@ -33,8 +33,8 @@ export class RssHttpClientDirectService implements IRssHttpClientComponentServic
       }
       catch (err) {
 
-        console.log("RssHttpClientDirectService.get: error retrieving feed");
-        console.log(err);
+        //console.log("RssHttpClientDirectService.get: error retrieving feed");
+        //console.log(err);
 
         reject(err + " - " + strings.ErrorPossibleCORSBlock);
         return;
@@ -47,7 +47,7 @@ export class RssHttpClientDirectService implements IRssHttpClientComponentServic
         RssXmlParserService.init();
 
         try {
-          let feedOutput = await RssXmlParserService.parse(rawFeedOutput);
+          let feedOutput = await RssXmlParserService.parse(rawFeedOutput, {cleanXmlFeed: true});
 
           if (feedOutput) {
             response = this.convertRssFeedToRssReaderResponse(feedOutput, feedRequest.maxCount);
@@ -59,6 +59,8 @@ export class RssHttpClientDirectService implements IRssHttpClientComponentServic
           }
         }
         catch (err) {
+          //console.log("error");
+          //console.log(err);
           reject(strings.ErrorCovertFeedInvalidSource);
         }
 

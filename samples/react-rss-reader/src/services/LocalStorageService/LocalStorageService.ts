@@ -33,12 +33,12 @@ class LocalStorageService implements ILocalStorageService {
           //var keyHash: string = md5(keyToken.keyName);
           //var keyHash: string = ObjectHash.MD5(keyToken.keyName);
           var keyHash: string | Int32Array = Md5.hashStr(JSON.stringify(keyToken.keyName));
-          console.log("LS get: keyhash - " + keyHash);
+          //console.log("LS get: keyhash - " + keyHash);
 
 
           //create the corrrect storage key based on keyHash and possible prefix
           const storageKey: string = (keyToken.keyPrefix ? keyToken.keyPrefix + "_" : "") + keyHash;
-          console.log("LS get: storagekey - " + storageKey);
+          //console.log("LS get: storagekey - " + storageKey);
 
           //attempt to get the key/value from local storage based on storageKey
           const keyValue: ILocalStorageObject = JSON.parse(localStorage.getItem(storageKey)) as ILocalStorageObject;
@@ -110,11 +110,11 @@ class LocalStorageService implements ILocalStorageService {
           //var keyHash: string = md5(keyToken.keyName);
           //var keyHash: string = ObjectHash.MD5(keyToken.keyName);
           var keyHash: string | Int32Array = Md5.hashStr(JSON.stringify(keyToken.keyName));
-          console.log("LS set: keyhash - " + keyHash);
+          //console.log("LS set: keyhash - " + keyHash);
 
           //create the corrrect storage key based on keyHash and possible prefix
           const storageKey: string = (keyToken.keyPrefix ? keyToken.keyPrefix + "_" : "") + keyHash;
-          console.log("LS set: storagekey - " + storageKey);
+          //console.log("LS set: storagekey - " + storageKey);
 
           //create a storage object to hold the value and storage date/time "now"
           const keyValue: ILocalStorageObject = {
